@@ -2,6 +2,7 @@ extends Area2D
 
 @export var next_scene: String
 @export var player_spawn_position: Vector2
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

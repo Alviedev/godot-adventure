@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 
 [node name="SceneEntrance" type="Area2D" unique_id=929520602]
+collision_mask = 2
 script = ExtResource("1_uqeog")
 next_scene = "res://Scenes/DungeonScene/dungeon_scene.tscn"
 

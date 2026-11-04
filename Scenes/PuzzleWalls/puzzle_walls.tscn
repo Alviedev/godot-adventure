@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d20wq4ug672do"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elpgg"]
+size = Vector2(75, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nr542"]
+size = Vector2(9.5, 57)
+
+[node name="PuzzleWalls" type="StaticBody2D" unique_id=1843795072]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=120469316]
+position = Vector2(0, -29)
+shape = SubResource("RectangleShape2D_elpgg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=206423284]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_elpgg")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=2130206021]
+position = Vector2(-37.25, 0.5)
+shape = SubResource("RectangleShape2D_nr542")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=946305583]
+position = Vector2(38, 3)
+shape = SubResource("RectangleShape2D_nr542")
