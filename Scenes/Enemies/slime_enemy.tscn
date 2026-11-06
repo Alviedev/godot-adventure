@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://xmrhbm5y88gk"]
+
+[ext_resource type="Texture2D" uid="uid://10ji6qdoya40" path="res://Ninja Adventure - Asset Pack/Actor/Monsters/Slime3/Slime3.png" id="1_p6sbt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uyk1"]
+atlas = ExtResource("1_p6sbt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uyk1")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0u6y"]
+
+[node name="SlimeEnemy" type="CharacterBody2D" unique_id=450215878]
+collision_layer = 16
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1271710543]
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2050200395]
+shape = SubResource("CircleShape2D_d0u6y")

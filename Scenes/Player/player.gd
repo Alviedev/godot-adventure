@@ -7,6 +7,7 @@ class_name Player
 @export var push_strength := 500
 @onready var interact_box: Area2D = $InteractBox
 @onready var treasure_label: Label = %TreasureLabel
+@onready var hp_bar: AnimatedSprite2D = %HPBar
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,7 @@ func _ready() -> void:
 	var score = 200
 	interact_box.position = Vector2(0,8)
 	update_treasure_label()
+	update_hp_bar()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,3 +77,29 @@ func _on_interact_box_body_exited(body: Node2D) -> void:
 func update_treasure_label():
 	var treasure_amount: int = SceneManager.opened_chests.size()
 	treasure_label.text = str(treasure_amount)
+
+
+func _on_hitbox_area_2d_body_entered(body: Node2D) -> void:
+	SceneManager.player_hp -= 1
+	update_hp_bar()
+	if SceneManager.player_hp <= 0:
+		die()
+
+func die():
+	SceneManager.player_hp = 3
+	get_tree().call_deferred("reload_current_scene")
+	
+func update_hp_bar():
+	match SceneManager.player_hp:
+		4:
+			hp_bar.play("4_hp")
+		3: 
+			hp_bar.play("3_hp")
+		2: 
+			hp_bar.play("2_hp")
+		1: 
+			hp_bar.play("1_hp")
+		0: 
+			hp_bar.play("0_hp")
+	
+	

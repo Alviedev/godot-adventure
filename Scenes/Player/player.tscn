@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d2xq0pnnkt7hj" path="res://Scenes/Player/player.gd" id="1_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://d4mmjc5r8gsvw" path="res://Ninja Adventure - Asset Pack/Items/Scroll/ScrollEmpty.png" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://drngbs2t02np0" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaRed2/SeparateAnim/Walk.png" id="3_xpcdj"]
+[ext_resource type="Texture2D" uid="uid://c2djyhb3iblh4" path="res://Ninja Adventure - Asset Pack/Ui/LifeReceptacle/heart.png" id="4_mtuoh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3d8c"]
 atlas = ExtResource("3_xpcdj")
@@ -149,6 +150,72 @@ size = Vector2(8, 8)
 [sub_resource type="LabelSettings" id="LabelSettings_a3d8c"]
 font_size = 48
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnuln"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqm4k"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcvs5"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ma5"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eksi1"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnuln")
+}],
+"loop": 1,
+"name": &"0_hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqm4k")
+}],
+"loop": 1,
+"name": &"1_hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcvs5")
+}],
+"loop": 1,
+"name": &"2_hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ma5")
+}],
+"loop": 1,
+"name": &"3_hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eksi1")
+}],
+"loop": 1,
+"name": &"4_hp",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 4.0
+
 [node name="Player" type="CharacterBody2D" unique_id=503922285]
 collision_layer = 2
 collision_mask = 7
@@ -174,10 +241,10 @@ debug_color = Color(0.18271238, 0.6429914, 0, 0.41960785)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1360459293]
 
 [node name="Panel" type="Panel" parent="CanvasLayer" unique_id=2103088248]
-offset_left = 72.0
-offset_top = 60.0
-offset_right = 251.0
-offset_bottom = 128.0
+offset_left = 143.0
+offset_top = 59.0
+offset_right = 322.0
+offset_bottom = 127.0
 
 [node name="TreasureLabel" type="Label" parent="CanvasLayer/Panel" unique_id=1510496333]
 unique_name_in_owner = true
@@ -196,5 +263,22 @@ offset_right = 171.0
 offset_bottom = 63.0
 texture = ExtResource("3_mtuoh")
 
+[node name="HPBar" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=756713222]
+unique_name_in_owner = true
+position = Vector2(93, 90)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"4_hp"
+
+[node name="HitboxArea2D" type="Area2D" parent="." unique_id=150122710]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea2D" unique_id=182768739]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_g4v7s")
+debug_color = Color(0.99201065, 0, 0.26412743, 0.41960785)
+
 [connection signal="body_entered" from="InteractBox" to="." method="_on_interact_box_body_entered"]
 [connection signal="body_exited" from="InteractBox" to="." method="_on_interact_box_body_exited"]
+[connection signal="body_entered" from="HitboxArea2D" to="." method="_on_hitbox_area_2d_body_entered"]
